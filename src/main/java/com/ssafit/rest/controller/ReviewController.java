@@ -24,7 +24,7 @@ public class ReviewController {
 		this.reviewDao = reviewDao;
 	}
 
-	@GetMapping("/")
+	@GetMapping("/list")
 	public ResponseEntity<List<Review>> getList(@RequestParam("videoId") String videoId) {
 		if (videoId == null) {
 			return ResponseEntity.badRequest().build();
