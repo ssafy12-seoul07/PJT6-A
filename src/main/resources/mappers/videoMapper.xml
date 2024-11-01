@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafit.rest.model.dao.VideoDao">	
+	<!-- 조회수 많은 영상 순으로 영상리스트를 리턴 -->
+	<select id="selectTopViewedVideos" resultType="Video">
+		SELECT * FROM videos
+		WHERE status = 1
+		ORDER BY view_count DESC
+		<if test="count != null">
+			LIMIT #{count}
+		</if>
+	</select>
+
+	<!-- 운동부위별 영상을 조회해서 영상리스트를 리턴 -->
+	<select id="selectVideosByPart" resultType="Video">
+		SELECT * FROM videos
+		WHERE part = #{part} AND status = 1
+		ORDER BY view_count DESC
+		<if test="count != null">
+			LIMIT #{count}
+		</if>
+	</select>
+</mapper>
