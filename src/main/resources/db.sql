@@ -31,7 +31,7 @@ CREATE TABLE reviews (
     video_id        VARCHAR(45)  NOT NULL,
     user_id         INT          NOT NULL,
     content         TEXT         NOT NULL,
-    parent_review_id INT          NOT NULL DEFAULT 0,
+    parent_review_id INT,
     created_at      TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
     modified_at     TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(user_id),

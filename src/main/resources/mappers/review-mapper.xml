@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafit.rest.model.dao.ReviewDao">
+	<resultMap id="reviewMap" type="Review">
+		<id property="reviewId" column="review_id" />
+		<result property="videoId" column="video_id" />
+		<result property="userId" column="user_id" />
+		<result property="parentReviewId" column="parent_review_id" />
+		<result property="content" column="content" />
+
+		<collection property="childReviews" ofType="Review">
+			<id property="reviewId" column="child_review_id" />
+			<result property="videoId" column="child_video_id" />
+			<result property="userId" column="child_user_id" />
+			<result property="parentReviewId" column="child_parent_review_id" />
+			<result property="content" column="child_content" />
+		</collection>
+	</resultMap>
+
+	<select id="selectAllByVideoId" resultMap="reviewMap" parameterType="string">
+		SELECT 
+			parent.review_id AS review_id,
+	        parent.video_id AS video_id,
+	        parent.user_id AS user_id,
+	        parent.parent_review_id AS parent_review_id,
+	        parent.content AS content,
+	        child.review_id AS child_review_id,
+	        child.video_id AS child_video_id,
+	        child.user_id AS child_user_id,
+	        child.parent_review_id AS child_parent_review_id,
+	        child.content AS child_content
+		FROM reviews parent
+		LEFT JOIN reviews child
+		ON child.parent_review_id = parent.review_id
+		WHERE parent.video_id = #{videoId} AND parent.parent_review_id IS NULL;
+	</select>
+
+	<select id="selectOne" resultMap="reviewMap" parameterType="int">
+		SELECT 
+			parent.review_id AS review_id,
+	        parent.video_id AS video_id,
+	        parent.user_id AS user_id,
+	        parent.parent_review_id AS parent_review_id,
+	        parent.content AS content,
+	        child.review_id AS child_review_id,
+	        child.video_id AS child_video_id,
+	        child.user_id AS child_user_id,
+	        child.parent_review_id AS child_parent_review_id,
+	        child.content AS child_content
+		FROM reviews parent
+		LEFT JOIN reviews child
+		ON child.parent_review_id = parent.review_id
+		WHERE parent.review_id = #{reviewId};
+	</select>
+
+	<insert id="insertReview" parameterType="Review"
+		useGeneratedKeys="true" keyProperty="reviewId">
+		INSERT INTO reviews (video_id,
+		user_id, parent_review_id, content)
+		VALUES ( #{videoId}, #{userId},
+		#{parentReviewId}, #{content});
+	</insert>
+
+	<update id="updateReview" parameterType="Review">
+		UPDATE reviews
+		SET
+		content = #{content}
+		WHERE review_id = #{reviewId};
+	</update>
+
+	<delete id="deleteReview" parameterType="int">
+		DELETE FROM reviews
+		WHERE review_id = #{reviewId};
+	</delete>
+</mapper>
