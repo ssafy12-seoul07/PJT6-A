@@ -5,7 +5,7 @@
 <mapper namespace="com.ssafit.rest.model.dao.UserDao">
 	<insert id="insertUser" parameterType="User" useGeneratedKeys="true" keyProperty="id">
     INSERT INTO users (id,password,name, email, status,created_at)
-    VALUES (#{id}, #{password},#{name}, #{email}, #{createdAt})
+    VALUES (#{id}, #{password},#{name}, #{email},#{status}, #{createdAt})
 	</insert>
 	
 	<update id="deleteUser" parameterType="int">
@@ -23,7 +23,7 @@
 	<select id="findUser" resultType="User" parameterType="String">
 		SELECT * 
 		FROM users
-		WHERE user_id = #{userID}
+		WHERE id = #{id}
 	</select>
 	
 	
