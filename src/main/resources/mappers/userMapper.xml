@@ -1,1 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<mapper namespace="com.ssafit.rest.model.dao.UserDao">
+	<insert id="insertUser" parameterType="User" useGeneratedKeys="true" keyProperty="id">
+    INSERT INTO users (id,password,name, email, status,created_at)
+    VALUES (#{id}, #{password},#{name}, #{email}, #{createdAt})
+	</insert>
+	
+	<update id="deleteUser" parameterType="int">
+		UPDATE users
+		SET status = 0
+		WHERE user_id = #{userID}
+	</update>
+	
+	<select id="findById" resultType="User" parameterType="int">
+		SELECT * 
+		FROM users
+		WHERE id = #{id};
+	</select>
+	
+	<select id="findUser" resultType="User" parameterType="String">
+		SELECT * 
+		FROM users
+		WHERE user_id = #{userID}
+	</select>
+	
+	
+	
+
+
+
+</mapper>
