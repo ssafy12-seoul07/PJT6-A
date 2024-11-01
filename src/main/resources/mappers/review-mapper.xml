@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafit.rest.model.dao.ReviewDao">
+	<select id="selectAllByVideoId" resultType="Review" parameterType="int">
+		SELECT parent.*
+		FROM review parent
+		LEFT JOIN review children
+		ON children.parent_id = parent.review_id
+		WHERE parent.video_id = #{videoId};
+	</select>
+	
+	<select id="selectOne" resultType="Review" parameterType="int">
+		SELECT parent.*
+		FROM review parent
+		LEFT JOIN review children
+		ON children.parent_id = parent.review_id
+		WHERE parent.review_id = #{id};
+	</select>
+	
+	<insert id="insertReview" parameterType="Review" useGeneratedKeys="true" keyProperty="reviewId">
+		INSERT INTO review (video_id, user_id, parent_id, content)
+		VALUES ( ${videoId}, ${userId}, ${parentId}, ${content});
+	</insert>
+	
+	<update id="updateReview" parameterType="Review">
+		UPDATE review
+		SET content = ${content]
+		WHERE review_id = ${reviewId};
+	</update>
+	
+	<delete id="deleteReview" parameterType="int">
+		DELETE FROM review
+		WHERE id = #{id};
+	</delete>
+</mapper>
