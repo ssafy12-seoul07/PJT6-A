@@ -20,16 +20,16 @@ import jakarta.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("/api/users")
-public class UserController {
+public class UserRestController {
 	private final UserService userService;
 	
-	public UserController(UserService userService) {
+	public UserRestController(UserService userService) {
 		this.userService = userService;
 	}
 	
 	
 	//회원가입
-	@PostMapping("/user")
+	@PostMapping("/regist")
 	public ResponseEntity<?>join(@RequestBody User user){
 		boolean result = userService.signup(user);
 		if (result) {
@@ -38,7 +38,7 @@ public class UserController {
 	}
 	
 	//회원 탈퇴
-	@DeleteMapping("/user/{id}")
+	@DeleteMapping("/withdraw/{id}")
 	public ResponseEntity<?>delete(@PathVariable("id") int id){
 		boolean isDeleted = userService.delete(id);
 		if (isDeleted)
@@ -47,7 +47,7 @@ public class UserController {
 	}
 	
 	//로그인
-	@PostMapping("/user")
+	@PostMapping("/login")
 	public ResponseEntity<?>login(@RequestBody User loginRequest, HttpServletRequest request, HttpServletResponse response){
 		User user = userService.login(loginRequest.getId(), loginRequest.getPassword());
 		if (user != null) {
