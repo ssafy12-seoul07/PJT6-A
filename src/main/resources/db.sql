@@ -35,7 +35,8 @@ CREATE TABLE reviews (
     created_at      TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
     modified_at     TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(user_id),
-    FOREIGN KEY (video_id) REFERENCES videos(video_id)
+    FOREIGN KEY (video_id) REFERENCES videos(video_id),
+    FOREIGN KEY (parent_review_id) REFERENCES reviews(review_id)
 );
 
 -- favorites 테이블 생성
