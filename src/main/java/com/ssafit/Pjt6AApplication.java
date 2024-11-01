@@ -1,4 +1,4 @@
-package com.ssafy.ssafit;
+package com.ssafit;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
