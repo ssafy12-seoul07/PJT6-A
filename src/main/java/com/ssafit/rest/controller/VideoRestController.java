@@ -22,23 +22,43 @@ public class VideoRestController {
 	@Autowired
 	VideoService vs;
 	
-	// 조회수 많은 영상 출력
-	@GetMapping("/most-viewed/{count}")
-	public ResponseEntity<List<Video>> getTopViewedVideos(@PathVariable("count") int count) {
-		List<Video> videos = vs.getTopViewedVideos(count);
-		if (videos == null || videos.isEmpty()) {
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-		}
-		return new ResponseEntity<>(videos, HttpStatus.OK);
-	}
+	// count 없이 전체 조회
+    @GetMapping("/most-viewed")
+    public ResponseEntity<List<Video>> getTopViewedVideos() {
+    	List<Video> videos = vs.getTopViewedVideos(null);
+        if (videos == null || videos.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(videos, HttpStatus.OK);
+    }
 	
-	// 운동부위별 영상 출력
-	@GetMapping("/search/{part}/{count}")
-	public ResponseEntity<List<Video>> getVideosByPart(@PathVariable("part") String part, @PathVariable("count") int count) {
-		List<Video> videos = vs.getVideosByPart(part, count);
-		if (videos == null || videos.isEmpty()) {
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-		}
-		return new ResponseEntity<>(videos, HttpStatus.OK);
-	}
+    // count 있는 경우
+    @GetMapping("/most-viewed/{count}")
+    public ResponseEntity<List<Video>> getTopViewedVideos(@PathVariable Integer count) {
+        List<Video> videos = vs.getTopViewedVideos(count);
+        if (videos == null || videos.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(videos, HttpStatus.OK);
+    }
+    
+    // count 없이 부위별 조회
+    @GetMapping("/search/{part}")
+    public ResponseEntity<List<Video>> getVideosByPart(@PathVariable String part) {
+        List<Video> videos = vs.getVideosByPart(part, null);
+        if (videos == null || videos.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(videos, HttpStatus.OK);
+    }
+	
+    // count 있는 부위별 조회
+    @GetMapping("/search/{part}/{count}")
+    public ResponseEntity<List<Video>> getVideosByPart(@PathVariable String part, @PathVariable Integer count) {
+        List<Video> videos = vs.getVideosByPart(part, count);
+        if (videos == null || videos.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(videos, HttpStatus.OK);
+    }
 }

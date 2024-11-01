@@ -8,6 +8,6 @@ import com.ssafit.rest.model.dto.Video;
 
 @Mapper
 public interface VideoDao {
-	List<Video> selectTopViewedVideos(int count);
-	List<Video> selectVideosByPart(String part, int count);
+	List<Video> selectTopViewedVideos(Integer count);
+	List<Video> selectVideosByPart(String part, Integer count);
 }

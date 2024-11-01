@@ -6,6 +6,6 @@ import com.ssafit.rest.model.dto.Video;
 
 public interface VideoService {
 	
-	List<Video> getTopViewedVideos(int count);
-	List<Video> getVideosByPart(String part, int count);
+	List<Video> getTopViewedVideos(Integer count);
+	List<Video> getVideosByPart(String part, Integer count);
 }
