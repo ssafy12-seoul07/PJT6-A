@@ -36,8 +36,8 @@
 | Column Name    | Data Type    | Constraints                                                     | 비고                                                 |
 | -------------- | ------------ | --------------------------------------------------------------- | ---------------------------------------------------- |
 | review_id      | INT          | NOT NULL, AUTO_INCREMENT, PRIMARY KEY, UNIQUE                   |                                                      |
-| video_id       | VARCHAR(45)  | NOT NULL, FOREIGN KEY REFERENCES `video`(`video_id`)            |                                                      |
-| user_id        | INT          | NOT NULL, FOREIGN KEY REFERENCES `user`(`user_id`)              |                                                      |
+| video_id       | VARCHAR(45)  | NOT NULL, FOREIGN KEY REFERENCES `videos`(`video_id`)           |                                                      |
+| user_id        | INT          | NOT NULL, FOREIGN KEY REFERENCES `users`(`user_id`)             |                                                      |
 | content        | TEXT         | NOT NULL                                                        |                                                      |
 | parent_review_id | INT        | DEFAULT NULL, FOREIGN KEY REFERENCES `reviews`(`review_id`)     | 0: 기본 댓글, review_id: 대댓글을 위한 원댓글 아이디          |
 | created_at     | TIMESTAMP    | NOT NULL, DEFAULT CURRENT_TIMESTAMP                             |                                                      |
@@ -47,8 +47,8 @@
 
 | Column Name | Data Type    | Constraints                                                                    | 비고                |
 |------------|--------------|--------------------------------------------------------------------------------|---------------------|
-| user_id    | INT          | NOT NULL, PRIMARY KEY, FOREIGN KEY REFERENCES `user`(`user_id`)                | 복합키(Composite Key)|
-| video_id   | VARCHAR(255) | NOT NULL, PRIMARY KEY, FOREIGN KEY REFERENCES `video`(`video_id`)              | 복합키(Composite Key)|
+| user_id    | INT          | NOT NULL, PRIMARY KEY, FOREIGN KEY REFERENCES `users`(`user_id`)               | 복합키(Composite Key)|
+| video_id   | VARCHAR(255) | NOT NULL, PRIMARY KEY, FOREIGN KEY REFERENCES `videos`(`video_id`)             | 복합키(Composite Key)|
 | updated_at | TIMESTAMP    | NOT NULL, DEFAULT CURRENT_TIMESTAMP                                            |                     |
 
 - 관계
