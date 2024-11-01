@@ -28,7 +28,7 @@ public class Review {
 		this.userId = userId;
 		this.videoId = videoId;
 		this.content = content;
-		this.setParentReviewId(parentReviewId);
+		this.parentReviewId = parentReviewId;
 	}
 
 	public Review(int reviewId, String videoId, int userId, String content, Integer parentReviewId,
@@ -39,8 +39,8 @@ public class Review {
 
 		this.content = content;
 
-		this.setParentReviewId(parentReviewId);
-		this.setChildReviews(childReviews);
+		this.parentReviewId = parentReviewId;
+		this.childReviews = childReviews;
 		this.createdAt = createdAt;
 		this.modifedAt = modifedAt;
 	}
