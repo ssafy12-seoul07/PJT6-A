@@ -15,14 +15,14 @@ public class VideoServiceImpl implements VideoService {
 	private VideoDao vd;
 
 	@Override
-	public List<Video> getTopViewedVideos() {
-		List<Video> result = vd.selectTopViewedVideos();
+	public List<Video> getTopViewedVideos(int count) {
+		List<Video> result = vd.selectTopViewedVideos(count);
 		return result;
 	}
 
 	@Override
-	public List<Video> getVideosByPart(String part) {
-		List<Video> result = vd.selectVideosByPart(part);
+	public List<Video> getVideosByPart(String part, int count) {
+		List<Video> result = vd.selectVideosByPart(part, count);
 		return result;
 	}
 	

@@ -23,9 +23,9 @@ public class VideoRestController {
 	VideoService vs;
 	
 	// 조회수 많은 영상 출력
-	@GetMapping("/most-viewed")
-	public ResponseEntity<List<Video>> getTopViewedVideos() {
-		List<Video> videos = vs.getTopViewedVideos();
+	@GetMapping("/most-viewed/{count}")
+	public ResponseEntity<List<Video>> getTopViewedVideos(@PathVariable("count") int count) {
+		List<Video> videos = vs.getTopViewedVideos(count);
 		if (videos == null || videos.isEmpty()) {
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
@@ -33,9 +33,9 @@ public class VideoRestController {
 	}
 	
 	// 운동부위별 영상 출력
-	@GetMapping("/search/{part}")
-	public ResponseEntity<List<Video>> getVideosByPart(@PathVariable("part") String part) {
-		List<Video> videos = vs.getVideosByPart(part);
+	@GetMapping("/search/{part}/{count}")
+	public ResponseEntity<List<Video>> getVideosByPart(@PathVariable("part") String part, @PathVariable("count") int count) {
+		List<Video> videos = vs.getVideosByPart(part, count);
 		if (videos == null || videos.isEmpty()) {
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}

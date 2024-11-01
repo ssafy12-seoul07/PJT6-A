@@ -7,12 +7,18 @@
 		SELECT * FROM videos
 		WHERE status = 1
 		ORDER BY view_count DESC
+		<if test="count != null">
+			LIMIT #{count}
+		</if>
 	</select>
 
 	<!-- 운동부위별 영상을 조회해서 영상리스트를 리턴 -->
-	<select id="selectVideosByPart" resultType="Video" parameterType="String">
+	<select id="selectVideosByPart" resultType="Video">
 		SELECT * FROM videos
 		WHERE part = #{part} AND status = 1
 		ORDER BY view_count DESC
+		<if test="count != null">
+			LIMIT #{count}
+		</if>
 	</select>
 </mapper>
