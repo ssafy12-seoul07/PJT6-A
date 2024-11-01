@@ -10,7 +10,7 @@ public class Review {
 
 	private String content;
 
-	private int parentReviewId;
+	private Integer parentReviewId; // tree 구조 상 null 이 정확하기 대문.
 	private List<Review> childReviews;
 	private LocalDateTime createdAt;
 	private LocalDateTime modifedAt;
@@ -22,24 +22,23 @@ public class Review {
 		this.videoId = videoId;
 		this.userId = userId;
 		this.content = content;
-		this.setParentReviewId(0);
 	}
 
-	public Review(int userId, String videoId, String content, int parentId) {
+	public Review(int userId, String videoId, String content, Integer parentReviewId) {
 		this.userId = userId;
 		this.videoId = videoId;
 		this.content = content;
-		this.setParentReviewId(parentId);
+		this.setParentReviewId(parentReviewId);
 	}
 
-	public Review(int reviewId, String videoId, int userId, String content, int parentReviewId, List<Review> childReviews,
-			LocalDateTime createdAt, LocalDateTime modifedAt) {
+	public Review(int reviewId, String videoId, int userId, String content, Integer parentReviewId,
+			List<Review> childReviews, LocalDateTime createdAt, LocalDateTime modifedAt) {
 		this.reviewId = reviewId;
 		this.videoId = videoId;
 		this.userId = userId;
-		
+
 		this.content = content;
-		
+
 		this.setParentReviewId(parentReviewId);
 		this.setChildReviews(childReviews);
 		this.createdAt = createdAt;
@@ -70,11 +69,11 @@ public class Review {
 		this.videoId = videoId;
 	}
 
-	public int getParentReviewId() {
+	public Integer getParentReviewId() {
 		return parentReviewId;
 	}
 
-	public void setParentReviewId(int parentReviewId) {
+	public void setParentReviewId(Integer parentReviewId) {
 		this.parentReviewId = parentReviewId;
 	}
 

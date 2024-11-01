@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ssafit.rest.model.dao.ReviewDao;
 import com.ssafit.rest.model.dto.Review;
 
+import io.swagger.v3.oas.annotations.Parameter;
+
 @RestController("/api/review")
 public class ReviewController {
 	private ReviewDao reviewDao;
@@ -24,7 +26,8 @@ public class ReviewController {
 		this.reviewDao = reviewDao;
 	}
 
-	@GetMapping("/list")
+	@GetMapping("list")
+	@Parameter(name = "videoId", required = true)
 	public ResponseEntity<List<Review>> getList(@RequestParam("videoId") String videoId) {
 		if (videoId == null) {
 			return ResponseEntity.badRequest().build();
@@ -38,9 +41,9 @@ public class ReviewController {
 		return ResponseEntity.ok(list);
 	}
 
-	@GetMapping("/")
-	public ResponseEntity<Review> getReview(@PathVariable int id) {
-		Review review = reviewDao.selectOne(id);
+	@GetMapping("{reviewId}")
+	public ResponseEntity<Review> getReview(@PathVariable("reviewId") int reviewId) {
+		Review review = reviewDao.selectOne(reviewId);
 		if (review == null) {
 			return ResponseEntity.notFound().build();
 		}
@@ -57,24 +60,24 @@ public class ReviewController {
 
 		return ResponseEntity.status(HttpStatus.CREATED).body(review);
 	}
-	
+
 	@PutMapping()
 	public ResponseEntity<Review> update(@RequestBody Review review) {
 		int result = reviewDao.updateReview(review);
 		if (result < 1) {
 			return ResponseEntity.internalServerError().build();
 		}
-		
+
 		return ResponseEntity.ok(reviewDao.selectOne(review.getReviewId()));
 	}
-	
-	@DeleteMapping()
+
+	@DeleteMapping("{reviewId}")
 	public ResponseEntity<?> delete(@PathVariable int reviewId) {
 		int result = reviewDao.deleteReview(reviewId);
 		if (result < 1) {
 			return ResponseEntity.internalServerError().build();
 		}
-		
-		return ResponseEntity.ok(null);
+
+		return ResponseEntity.ok("");
 	}
 }
