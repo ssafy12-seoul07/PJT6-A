@@ -39,7 +39,7 @@
 | video_id       | VARCHAR(45)  | NOT NULL, FOREIGN KEY REFERENCES `video`(`video_id`)            |                                                      |
 | user_id        | INT          | NOT NULL, FOREIGN KEY REFERENCES `user`(`user_id`)              |                                                      |
 | content        | TEXT         | NOT NULL                                                        |                                                      |
-| parent_review_id | INT          | NOT NULL DEFAULT 0                                              | 0: 기본 댓글, review_id: 대댓글을 위한 원댓글 아이디 |
+| parent_review_id | INT        | DEFAULT NULL, FOREIGN KEY REFERENCES `user`(`reviews`)          | 0: 기본 댓글, review_id: 대댓글을 위한 원댓글 아이디    |
 | created_at     | TIMESTAMP    | NOT NULL, DEFAULT CURRENT_TIMESTAMP                             |                                                      |
 | modified_at    | TIMESTAMP    | NOT NULL, DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP |                                                      |
 
