@@ -5,40 +5,43 @@ import java.util.List;
 
 public class Review {
 	private int reviewId;
-	private int userId;
-	private int parentId;
-	private List<Review> childReviews;
 	private String videoId;
+	private int userId;
+
 	private String content;
+
+	private int parentReviewId;
+	private List<Review> childReviews;
 	private LocalDateTime createdAt;
 	private LocalDateTime modifedAt;
 
 	public Review() {
 	}
 
-	public Review(int userId, String videoId, String content) {
-		this.userId = userId;
+	public Review(String videoId, int userId, String content) {
 		this.videoId = videoId;
-		this.parentId = 0;
-		this.content = content;
-	}
-	
-	public Review(int userId, String videoId, int parentId, String content) {
 		this.userId = userId;
-		this.videoId = videoId;
-		this.parentId = parentId;
 		this.content = content;
+		this.setParentReviewId(0);
 	}
 
-	public Review(int reviewId, int userId, String videoId, int parentId, List<Review> childReviews, String content, LocalDateTime createdAt,
-			LocalDateTime modifedAt) {
-		super();
-		this.reviewId = reviewId;
+	public Review(int userId, String videoId, String content, int parentId) {
 		this.userId = userId;
 		this.videoId = videoId;
-		this.parentId = parentId;
-		this.childReviews = childReviews;
 		this.content = content;
+		this.setParentReviewId(parentId);
+	}
+
+	public Review(int reviewId, String videoId, int userId, String content, int parentReviewId, List<Review> childReviews,
+			LocalDateTime createdAt, LocalDateTime modifedAt) {
+		this.reviewId = reviewId;
+		this.videoId = videoId;
+		this.userId = userId;
+		
+		this.content = content;
+		
+		this.setParentReviewId(parentReviewId);
+		this.setChildReviews(childReviews);
 		this.createdAt = createdAt;
 		this.modifedAt = modifedAt;
 	}
@@ -66,13 +69,21 @@ public class Review {
 	public void setVideoId(String videoId) {
 		this.videoId = videoId;
 	}
-	
-	public int getParentId() {
-		return parentId;
+
+	public int getParentReviewId() {
+		return parentReviewId;
 	}
 
-	public void setParentId(int parentId) {
-		this.parentId = parentId;
+	public void setParentReviewId(int parentReviewId) {
+		this.parentReviewId = parentReviewId;
+	}
+
+	public List<Review> getChildReviews() {
+		return childReviews;
+	}
+
+	public void setChildReviews(List<Review> childReviews) {
+		this.childReviews = childReviews;
 	}
 
 	public String getContent() {
