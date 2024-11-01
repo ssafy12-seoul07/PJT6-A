@@ -44,6 +44,7 @@ public class ReviewController {
 	@GetMapping("{reviewId}")
 	public ResponseEntity<Review> getReview(@PathVariable("reviewId") int reviewId) {
 		Review review = reviewDao.selectOne(reviewId);
+		System.out.println(review);
 		if (review == null) {
 			return ResponseEntity.notFound().build();
 		}

@@ -8,12 +8,19 @@ public class Review {
 	private String videoId;
 	private int userId;
 
+	@Override
+	public String toString() {
+		return "Review [reviewId=" + reviewId + ", videoId=" + videoId + ", userId=" + userId + ", content=" + content
+				+ ", parentReviewId=" + parentReviewId + ", childReviews=" + childReviews + ", createdAt=" + createdAt
+				+ ", modifedAt=" + modifiedAt + "]";
+	}
+
 	private String content;
 
 	private Integer parentReviewId; // tree 구조 상 null 이 정확하기 대문.
 	private List<Review> childReviews;
 	private LocalDateTime createdAt;
-	private LocalDateTime modifedAt;
+	private LocalDateTime modifiedAt;
 
 	public Review() {
 	}
@@ -42,7 +49,7 @@ public class Review {
 		this.parentReviewId = parentReviewId;
 		this.childReviews = childReviews;
 		this.createdAt = createdAt;
-		this.modifedAt = modifedAt;
+		this.modifiedAt = modifedAt;
 	}
 
 	public int getReviewId() {
@@ -102,11 +109,11 @@ public class Review {
 	}
 
 	public LocalDateTime getModifedAt() {
-		return modifedAt;
+		return modifiedAt;
 	}
 
 	public void setModifedAt(LocalDateTime modifedAt) {
-		this.modifedAt = modifedAt;
+		this.modifiedAt = modifedAt;
 	}
 
 }
